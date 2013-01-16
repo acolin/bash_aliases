@@ -3,39 +3,24 @@ alias agi='sudo apt-get install'
 alias agr='sudo apt-get remove'
 alias agp='sudo apt-get purge'
 
-#Bash commands
+# Bash commands
 alias s='sudo'
 alias lsd="ls -alF | grep /$"
-
-
-
-alias rt="source ~/.bash_profile"
-
-
-#Rails commands
-alias rs='rails server'
-alias bi='bundle install'
-alias rc="rails console"
-alias rr="rake routes"
-alias bin="bundle install"
-
-#cucumber
-alias bec='bundle exec rake cucumber'
-
-#gems
 alias sr='sudo rm -r'
+
+# Rails commands
+
+# Gems
 alias gu='gem uninstall'
 alias gi='gem install'
 alias c='clear'
 
-#uinstall all gems in a set
+# Uninstall all gems in a set
 alias gemrm='gem list | cut -d" " -f1 | xargs gem uninstall -aIx'
-
-#open gems dir
-alias og='open /Users/arnoldorodriguez/.rvm/gems/ruby-1.9.2-p136/bundler/gems/'
 
 # rails 3.0
 alias rn='rails new'
+alias rr="rake routes"
 alias rs='rails server'
 alias rg='rails generate'
 alias rgs='rails generate scaffold'
@@ -52,6 +37,7 @@ alias dbd='rake db:drop'
 alias dbm='rake db:migrate'
 alias dbr='rake db:rollback STEP=1000'
 alias dbs='rake db:seed'
+alias dbt='rake db:test:prepare'
 
 # bundler primary commands
 alias bi='bundle install'
@@ -83,8 +69,6 @@ alias gr='git remote'
 alias gcb='git checkout -b'
 alias gpo='git push origin -u'
 alias gme='git merge'
-alias gt='git branch --track'
-alias gdb='git branch -D'
 
 # heroku
 #=== General Commands
@@ -93,52 +77,32 @@ alias hh='heroku help'                         # show this usage
 alias hv='heroku version'                      # show the gem version
 alias hli='heroku list'                         # list your apps
 
-# create a new app
-function hc() {
-	echo 'app name:'
-	read app_name
-	heroku create $app_name
-}
-
 alias hi='heroku info'                         # show app info, like web url and git repo
 alias ho='heroku open'                         # open the app in a web browser
 
-# rename the app
-function hr () {
-	echo 'app new name:'
-	read app_new_name
-	heroku rename $app_new_name
-}
-
-# create and use a gemset
-function gcu(){
-read gemset_name
-rvm gemset create $gemset_name
-rvm gemset use $gemset_name
-}
 
 # add a collaborator
 function hsa () {
-	echo 'add collaborator email:'
-	read email
-	heroku sharing:add $email
+echo 'add collaborator email:'
+read email
+heroku sharing:add $email
 }
 
-# add a collaborator
+add# add a collaborator
 function hsr () {
-	echo 'remove collaborator email:'
-	read email
-	heroku sharing:remove $email
+echo 'remove collaborator email:'
+read email
+heroku sharing:remove $email
 }
 
 # transfers the app ownership
 function hst () {
-	echo 'transfer collaborator email:'
-	read email
-	sharing:transfer $email
+echo 'transfer collaborator email:'
+read email
+sharing:transfer $email
 }
 
-alias hc='heroku console'    # start an interactive console to the remote app
+alias hc='heroku console'    # start an  interactive console to the remote app
 
 alias hrs='heroku restart' # restart app servers
 alias hl='heroku logs'     # fetch recent log output for debugging
@@ -168,88 +132,7 @@ alias hep='heroku plugins'                      # list installed plugins
 alias hepi='heroku plugins:install'        # install the plugin from the specified git url
 alias hepu='plugins:uninstall' # remove the specified plugin
 
-#Complex tasks:
-#New app up and running on heroku
-# 1.Creates a new rails app locally
-# 2.Start a git repo
-# 3.Add and Commit
-# 4.Create app on heroku production and staging
-# 5.Finally push it on heroku
-
-function create_new_app () {
-	echo "type new app name?"
-	read app_name
-	rails new $app_name -d postgresql
-	cd $app_name
-	cp config/environments/production.rb config/environments/staging.rb
-	# cat ~/.staging >> config/database.yml
-	git init
-	git add .
-	git commit -m "Initial Commit"
-	heroku create "${app_name}-prod" --remote production
-	git push production master
-	heroku create "${app_name}-sta" --remote staging
-	git push staging master
-	heroku config:add RACK_ENV=staging --remote staging
-	git branch dev master
-	git checkout dev
-}
-
-#Add remote staging if production exists
-function add_remote_staging () {
-	echo "type app name?"
-	read app_name
-	heroku create "${app_name}-sta" --remote staging
-	git push staging master
-	heroku config:add RACK_ENV=staging --remote staging
-	git branch dev master
-	git checkout dev
-}
-
-#Adds a new project from heroku
-function pull_new_app () {
-	echo "type app name at heroku?"
-	read app_name
-	git clone "git@heroku.com:${app_name}-sta.git"
-	cd "${app_name}-sta"
-	git remote rename origin staging
-	git remote add production "git@heroku.com:${app_name}-prod.git"
-}
-
-
-alias gps='git push staging master' #push changes to staging
-alias gpp='git push production master' #push changes to production
-
-function gnb () {
-	echo "new branch name?"
-	read new_branch_name
-	git push staging staging:refs/heads/${new_branch_name}
-	git fetch staging
-	git checkout --track -b $new_feature_name staging/${new_feature_name}
-	git pull
-}
-
-function spree_sample () {
-	rails g spree:site
-	bundle exec rake spree:install
-	bundle exec rake spree_sample:install
-	bundle exec rake db:bootstrap
-}
-
-function spree_install () {
-	rails g spree:site
-	bundle exec rake spree:install
-	bundle exec rake db:migrate
-	bundle exec rake db:seed
-}
-
-function qp () {
-	git add .
-	git commit -m "quick push"
-	git push
-}
-
-#RVM
+# RVM
 alias ru='rvm use'
 alias rv='rvm ruby -v'
 alias rrl='rvm ruby list'
@@ -258,6 +141,13 @@ alias rgc='rvm gemset create'
 alias rgd='rvm gemset delete'
 alias rgl='rvm gemset list'
 alias rvg='rvm gemset'
+
+# create and use a gemset
+function gcu(){
+read gemset_name
+rvm gemset create $gemset_name
+rvm gemset use $gemset_name
+}
 
 #Vagrant
 alias vb='vagrant box'
@@ -275,36 +165,7 @@ alias vs='vagrant status'
 alias vsu='vagrant suspend'
 alias vu='vagrant up'
 
-function gra () {
-	for i in `git status | grep deleted | awk '{print $3}'`; do git rm $i; done
+# Removes all files with delete status in git
+function gitrm () {
+for i in `git statusus | grep deleted | awk '{print $3}'`; do git rm $i; done
 }
-
-#generate spree test app for spree_fitscrubs extension
-
-read -d '' PATHS_STRING <<"EOF"
-rake test_app \
-DB_NAME='postgresql' \
-SPREE_PATH='/Users/arnoldorodriguez/dev/spree' \
-EASY_CONTACT_PATH='/Users/arnoldorodriguez/dev/spree-easy-contact' \
-ADDRESS_BOOK_PATH='/Users/arnoldorodriguez/dev/spree_address_book'
-EOF
-
-alias spree_test=${PATHS_STRING}
-
-function hrb () {
-	git add .
-	git commit -m 'quick fix'
-	git push staging master
-	heroku rake db:rollback STEP=3000000 --app tailormed-sta
-}
-
-function tmb () {
-	echo "type app name at heroku?"
-	read app_name
-	heroku rake db:migrate --app ${app_name}
-	heroku rake db:seed --app ${app_name}
-	heroku rake spree_fitscrubs:seed --app ${app_name}
-	heroku rake spree_fitscrubs:default_women_scrubs --app ${app_name}
-}
-
-
