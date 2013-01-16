@@ -5,7 +5,7 @@ Contains my basic bash aliases for rails development
 
 ## Install
 
-1. Check a clone of this repo: `git clone http://github.com/revans/bash-it.git ~`
+1. Check a clone of this repo: `git clone git://github.com/acolin/bash_aliases.git ~`
 2. Insert the following lines in `~/.bashrc`
 
 ````

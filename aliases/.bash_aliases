@@ -5,6 +5,7 @@ alias agp='sudo apt-get purge'
 
 # Bash commands
 alias s='sudo'
+# List only dirs
 alias lsd="ls -alF | grep /$"
 alias sr='sudo rm -r'
 
