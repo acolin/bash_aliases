@@ -1,4 +1,4 @@
-bash_aliases
+Rails Development Bash Aliases
 ============
 
 Contains my basic bash aliases for rails development
