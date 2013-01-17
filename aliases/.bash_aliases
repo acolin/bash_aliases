@@ -95,7 +95,7 @@ read email
 heroku sharing:add $email
 }
 
-add# add a collaborator
+# add a collaborator
 function hsr () {
 echo 'remove collaborator email:'
 read email
