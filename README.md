@@ -15,9 +15,9 @@ Contains my basic bash aliases for rails development
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-. ~/aliases/.bash_aliases
+if [ -f ~/bash_aliases/.bash_aliases ]; then
+. ~/bash_aliases/.bash_aliases
 fi
 ````
 
-3. Run `source ~/aliases/.bashrc`
+3. Run `source ~/.bashrc`

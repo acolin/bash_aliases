@@ -5,6 +5,7 @@ alias agp='sudo apt-get purge'
 
 # Bash commands
 alias s='sudo'
+# List only dirs
 alias lsd="ls -alF | grep /$"
 alias sr='sudo rm -r'
 
@@ -69,6 +70,12 @@ alias gr='git remote'
 alias gcb='git checkout -b'
 alias gpo='git push origin -u'
 alias gme='git merge'
+alias gt='git branch --track'
+
+# Removes all files with delete status in git
+function gitrm () {
+for i in `git statusus | grep deleted | awk '{print $3}'`; do git rm $i; done
+}
 
 # heroku
 #=== General Commands
@@ -88,7 +95,7 @@ read email
 heroku sharing:add $email
 }
 
-add# add a collaborator
+# add a collaborator
 function hsr () {
 echo 'remove collaborator email:'
 read email
@@ -165,7 +172,5 @@ alias vs='vagrant status'
 alias vsu='vagrant suspend'
 alias vu='vagrant up'
 
-# Removes all files with delete status in git
-function gitrm () {
-for i in `git statusus | grep deleted | awk '{print $3}'`; do git rm $i; done
-}
+# Guard for virtual machine
+alias bg='bundle exec guard -p -l 10'
