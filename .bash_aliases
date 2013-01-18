@@ -173,4 +173,4 @@ alias vsu='vagrant suspend'
 alias vu='vagrant up'
 
 # Guard for virtual machine
-alias bg='bundle exec guard -p -l 10'
+alias beg='bundle exec guard -p -l 10'
