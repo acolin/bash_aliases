@@ -39,6 +39,7 @@ alias dbm='rake db:migrate'
 alias dbr='rake db:rollback STEP=1000'
 alias dbs='rake db:seed'
 alias dbt='rake db:test:prepare'
+alias rca='bundle exec rake assets:precompile'
 
 # bundler primary commands
 alias bi='bundle install'
