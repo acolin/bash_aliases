@@ -72,6 +72,8 @@ alias gcb='git checkout -b'
 alias gpo='git push origin -u'
 alias gme='git merge'
 alias gt='git branch --track'
+alias gf='git fetch'
+alias gri='git rebase -i'
 
 # Removes all files with delete status in git
 function gitrm () {
