@@ -77,7 +77,7 @@ alias gri='git rebase -i'
 
 # Removes all files with delete status in git
 function gitrm () {
-for i in `git statusus | grep deleted | awk '{print $3}'`; do git rm $i; done
+  for i in `git statusus | grep deleted | awk '{print $3}'`; do git rm $i; done
 }
 
 # heroku
@@ -93,23 +93,23 @@ alias ho='heroku open'                         # open the app in a web browser
 
 # add a collaborator
 function hsa () {
-echo 'add collaborator email:'
-read email
-heroku sharing:add $email
+  echo 'add collaborator email:'
+    read email
+    heroku sharing:add $email
 }
 
 # add a collaborator
 function hsr () {
-echo 'remove collaborator email:'
-read email
-heroku sharing:remove $email
+  echo 'remove collaborator email:'
+    read email
+    heroku sharing:remove $email
 }
 
 # transfers the app ownership
 function hst () {
-echo 'transfer collaborator email:'
-read email
-sharing:transfer $email
+  echo 'transfer collaborator email:'
+    read email
+    sharing:transfer $email
 }
 
 alias hc='heroku console'    # start an  interactive console to the remote app
@@ -123,10 +123,10 @@ alias hmf='heroku maintenance:off'              # take the app out of maintenanc
 alias hdpl='heroku db:pull'      # pull the app's database into a local database
 alias hdps='heroku db:push'      # push a local database into the app's remote database
 
-alias hdms='heroku rake db:migrate --remote staging'
-alias hdrs='heroku rake db:rollback STEP=1000 --remote staging'
-alias hdmp='heroku rake db:migrate --remote production'
-alias hdrp='heroku rake db:rollback STEP=1000 --remote production'
+alias hdms='heroku run rake db:migrate --remote staging'
+alias hdrs='heroku run rake db:rollback STEP=1000 --remote staging' # rollback up to 1000 migrations mostly all migrations
+alias hdmp='heroku run rake db:migrate --remote production' # migrate production db
+alias hdrp='heroku run rake db:rollback STEP=1000 --remote production' # rollback up to 1000 migrations for production
 
 alias had='heroku addons'                       # list installed addons
 alias hai='heroku addons:info'                  # list all available addons
@@ -154,9 +154,9 @@ alias rvg='rvm gemset'
 
 # create and use a gemset
 function gcu(){
-read gemset_name
-rvm gemset create $gemset_name
-rvm gemset use $gemset_name
+  read gemset_name
+    rvm gemset create $gemset_name
+    rvm gemset use $gemset_name
 }
 
 #Vagrant
@@ -175,5 +175,6 @@ alias vs='vagrant status'
 alias vsu='vagrant suspend'
 alias vu='vagrant up'
 
-# Guard for virtual machine
+# Run Guard detecting changes in virtual machines for virtual machine
 alias beg='bundle exec guard -p -l 10'
+alias gua='bundle exec guard'
